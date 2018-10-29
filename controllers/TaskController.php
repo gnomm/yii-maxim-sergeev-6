@@ -21,6 +21,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\validators\MyValidator;
 use yii\validators;
+use yii\web\UploadedFile;
 
 class TaskController extends Controller
 {
@@ -99,6 +100,23 @@ class TaskController extends Controller
 
     public function actionTest()
     {
+//       \Yii::$app->language = "en";
+        echo \Yii::t("app", 'error', ['error_code' => 404]);
+        exit;
+
+        $model = new Test();
+        if (\Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            $model->image = UploadedFile::getInstance($model, 'image');
+            $model->upload();
+            exit;
+//            var_dump($model);
+        }
+
+        return $this->render('test', ['model' => $model]);
+//        exit;
+
+
 //        $user = new Users();
 //        $user->login = 'qwerty';
 //        $user->password = \Yii::$app->security->generatePasswordHash('qwerty');

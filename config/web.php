@@ -5,11 +5,17 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'language' => 'en',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'createTaskEvents'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Admin',
+        ],
     ],
     'components' => [
         'request' => [
@@ -45,6 +51,14 @@ $config = [
         'db' => $db,
         'createTaskEvents' => [
             'class' => \app\components\CreateTaskEventsComponents::class
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'basePath' => '@app/messages'
+                ]
+            ]
         ],
         /*
         'urlManager' => [
