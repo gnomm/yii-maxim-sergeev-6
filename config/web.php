@@ -5,8 +5,8 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
-//    'sourceLanguage' => 'en',
-    'language' => 'en',
+    'language' => 'ru',
+//    'sourceLanguage' => 'ru',
 //    'language' => 'ru',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'createTaskEvents'],
@@ -62,14 +62,15 @@ $config = [
                 ]
             ]
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
+//        'urlManager' => [
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+////            'class' => 'codemix\localeurls\UrlManager',
+////            'languages' => ['ru', 'en'],
+////            'enableDefaultLanguageUrlCode' => true,
+//            'rules' => [
+//],
+//        ],
     ],
     'params' => $params,
 ];

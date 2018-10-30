@@ -7,15 +7,17 @@ namespace app\modules\admin;
  */
 class Admin extends \yii\base\Module
 {
+
     /**
      * {@inheritdoc}
      */
     public $controllerNamespace = 'app\modules\admin\controllers';
 
     public $defaultRoute = 'default';
-        /**
-         * {@inheritdoc}
-         */
+
+    /**
+     * {@inheritdoc}
+     */
     public function init()
     {
         parent::init();
