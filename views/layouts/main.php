@@ -36,7 +36,7 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-//    var_dump(Yii::$app->language);
+    //    var_dump(Yii::$app->language);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
@@ -46,8 +46,16 @@ AppAsset::register($this);
             ['label' => Yii::t("appLayoutsMain", "contact"), 'url' => ['/site/contact']],
 
             ['label' => Yii::t("appLayoutsMain", "languages"), 'items' => [
-                ['label' => Yii::t("appLayoutsMain", "russian"), 'url' => ''],
-                ['label' => Yii::t("appLayoutsMain", "english"), 'url' => '#']
+                ['label' => Yii::t("appLayoutsMain", "russian"), 'url' =>
+                    array_merge(Yii::$app->request->get(),
+                        [Yii::$app->controller->route, 'language' => 'ru']
+                    )
+
+                ],
+                ['label' => Yii::t("appLayoutsMain", "english"), 'url' =>
+                    array_merge(Yii::$app->request->get(),
+                        [Yii::$app->controller->route, 'language' => 'en']
+                    )]
             ]],
             Yii::$app->user->isGuest ? (
             ['label' => Yii::t("appLayoutsMain", "login"), 'url' => ['/site/login']]
@@ -77,8 +85,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?php echo Yii::t("appLayoutsMain", "myCompany")?> <?= date('Y') ?>
-<!--        --><?//=  $this->render('language')?>
+        <p class="pull-left">&copy; <?php echo Yii::t("appLayoutsMain", "myCompany") ?> <?= date('Y') ?>
         </p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>

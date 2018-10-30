@@ -5,9 +5,9 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
-    'language' => 'ru',
-//    'sourceLanguage' => 'ru',
-//    'language' => 'ru',
+    'sourceLanguage' => 'en',
+    'language' => 'en',
+    //    'language' => 'ru',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'createTaskEvents'],
     'aliases' => [
@@ -23,6 +23,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'PLDxj0-gGBFhlC6MW7raSR1M0EPpamZn',
+//            'baseUrl' => ''
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -59,18 +60,26 @@ $config = [
                 'app*' => [
                     'class' => \yii\i18n\PhpMessageSource::class,
                     'basePath' => '@app/messages'
-                ]
-            ]
+                ],
+            ],
         ],
-//        'urlManager' => [
+        'urlManager' => [
+//            'showScriptName' => false, //отключаем r=routes
+//            'enablePrettyUrl' => true, //отключаем index.php
+//            'enableStrictParsing' => true,
 //            'enablePrettyUrl' => true,
-//            'showScriptName' => false,
-////            'class' => 'codemix\localeurls\UrlManager',
-////            'languages' => ['ru', 'en'],
-////            'enableDefaultLanguageUrlCode' => true,
-//            'rules' => [
-//],
-//        ],
+//            'showScriptName' => true,
+//            'enableStrictParsing' =>false,
+            'class' => 'codemix\localeurls\UrlManager',
+            'languages' => ['en', 'ru'],
+//            'enableDefaultLanguageUrlCode' => true,
+            'rules' => [
+//                '/' => 'post/index', //для главной страницы
+//                'page/<view:[a-zA-Z0-9-]+>' => 'site/page',
+//                '/' => 'site/default/index'
+
+            ],
+        ],
     ],
     'params' => $params,
 ];
