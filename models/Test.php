@@ -29,7 +29,7 @@ class Test extends Model
     public function rules()
     {
         return [
-//            [['image'], 'file', 'extensions' => 'jpg, png'],
+            [['image'], 'file', 'extensions' => 'jpg, png'],
             [['title', 'content'], 'safe'],
         ];
     }

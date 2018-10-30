@@ -41,8 +41,8 @@ class TaskController extends Controller
             'provider' => $provider,
             'users' => $users
         ]);
-
     }
+
 
     public function actionView($id)
     {
@@ -50,6 +50,7 @@ class TaskController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
 
     protected function findModel($id)
     {
@@ -83,6 +84,7 @@ class TaskController extends Controller
         ]);
     }
 
+
     /**
      * Deletes an existing tasks model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -101,15 +103,16 @@ class TaskController extends Controller
     public function actionTest()
     {
 //       \Yii::$app->language = "en";
-        echo \Yii::t("app", 'error', ['error_code' => 404]);
-        exit;
+//        echo \Yii::t("app", 'error', ['error_code' => 404]);
+//        exit;
 
         $model = new Test();
         if (\Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
             $model->image = UploadedFile::getInstance($model, 'image');
             $model->upload();
-            exit;
+//            var_dump( $model->upload());
+//            exit;
 //            var_dump($model);
         }
 

@@ -27,6 +27,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'user_id')->dropDownList($users) ?>
 <!--    --><?//= $form->field($model, 'created_at') ?>
 <!--    --><?//= $form->field($model, 'updated_at') ?>
+    <?= $form->field($model, 'image')->fileInput();?>
+<!--    echo \yii\helpers\Html::submitButton('Загрузить');-->
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

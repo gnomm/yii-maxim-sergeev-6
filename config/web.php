@@ -5,7 +5,9 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+//    'sourceLanguage' => 'en',
     'language' => 'en',
+//    'language' => 'ru',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'createTaskEvents'],
     'aliases' => [

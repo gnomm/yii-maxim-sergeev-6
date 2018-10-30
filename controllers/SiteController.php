@@ -42,6 +42,7 @@ class SiteController extends Controller
         ];
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -55,8 +56,10 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+
         ];
     }
+
 
     /**
      * Displays homepage.
@@ -67,6 +70,7 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+
 
     /**
      * Login action.
@@ -90,6 +94,7 @@ class SiteController extends Controller
         ]);
     }
 
+
     /**
      * Logout action.
      *
@@ -101,6 +106,7 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
 
     /**
      * Displays contact page.
@@ -120,6 +126,7 @@ class SiteController extends Controller
         ]);
     }
 
+
     /**
      * Displays about page.
      *
@@ -134,23 +141,17 @@ class SiteController extends Controller
     {
         $model = new Users();
         $role = ArrayHelper::map(Roles::find()->all(), 'id', 'name');
-//var_dump($role);
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-//            var_dump($model->getAddUser());
-            $model->getAddUser();
 
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->getAddUser();
             Yii::$app->session->setFlash('regFormSubmitted');
 
             return $this->refresh();
         }
 
-//        var_dump((Yii::$app->request->post()));
-
         return $this->render('reg', [
             'model' => $model,
             'role' => $role
         ]);
-
     }
-
 }

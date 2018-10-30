@@ -6,6 +6,10 @@ use app\events\SentTaskMailEvent;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\Url;
+use yii\imagine\Image;
+use yii\web\UploadedFile;
+use yii\base\Model;
 
 /**
  * This is the model class for table "tasks".
@@ -15,11 +19,15 @@ use yii\db\Expression;
  * @property string $description
  * @property string $date
  * @property int $user_id
- *
+
  * @property Users $user
- */
+ *  @var $image UploadedFile
+ * */
+
 class Tasks extends \yii\db\ActiveRecord
 {
+
+//    public $image;
 
     public function behaviors()
     {
@@ -55,7 +63,7 @@ class Tasks extends \yii\db\ActiveRecord
 //            [['date'], 'default', 'value' => date('Y-m-d:H:i:s')],
             [['date'], 'default', 'value' => new Expression('NOW()')],
 //            [['date'], 'default', 'value' => Tasks::find()->],
-
+            [['image'], 'file', 'extensions' => 'jpg, png'],
             [['date'], 'compare', 'compareValue' => date('Y-m-d'), 'operator' => '>='],
 //            [['date'], 'compare', 'compareValue' => new Expression('NOW()'), 'operator' => '>='],
 
@@ -73,6 +81,7 @@ class Tasks extends \yii\db\ActiveRecord
             'description' => 'Description',
             'date' => 'Date',
             'user_id' => 'User ID',
+            'image' => 'Image'
 //            'created_at' => 'Created_at',
 //            'updated_at' => 'Updated_at'
         ];
@@ -106,17 +115,24 @@ class Tasks extends \yii\db\ActiveRecord
             ->all();
     }
 
-//    public function getTaskMail()
-//    {
-//        $event = new SentTaskMailEvent();
-//        $event->sentMassage = 'Привет тыц получил новую задачу';
-//    }
-
     public static function getUserEmail($event)
     {
         return static::find()
             ->where(['user_id' => $event->sender->user_id])
             ->with('user')
             ->one();
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $basename = $this->image->getBaseName() . "." . $this->image->getExtension();
+            $filename = '@webroot/uploadImg/' . $basename;
+            $this->image->saveAs(\Yii::getAlias($filename));
+
+            Image::thumbnail($filename, 100, 100)
+                ->save(\Yii::getAlias('@webroot/uploadImg/small/' . $basename));
+        }
+        return false;
     }
 }

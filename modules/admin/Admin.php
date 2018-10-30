@@ -12,7 +12,7 @@ class Admin extends \yii\base\Module
      */
     public $controllerNamespace = 'app\modules\admin\controllers';
 
-    public $defaultRoute = 'task';
+    public $defaultRoute = 'default';
         /**
          * {@inheritdoc}
          */

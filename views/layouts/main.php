@@ -36,19 +36,21 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+//    var_dump(Yii::$app->language);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Tasks', 'url' => ['/task/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => Yii::t("app", "menu_languages"), 'items' => [
-                ['label' => 'русский', 'url' => '#'],
-                ['label' => 'английский', 'url' => '#']
+            ['label' => Yii::t("appLayoutsMain", "home"), 'url' => ['/site/index']],
+            ['label' => Yii::t("appLayoutsMain", "tasks"), 'url' => ['/task/index']],
+            ['label' => Yii::t("appLayoutsMain", "about"), 'url' => ['/site/about']],
+            ['label' => Yii::t("appLayoutsMain", "contact"), 'url' => ['/site/contact']],
+
+            ['label' => Yii::t("appLayoutsMain", "languages"), 'items' => [
+                ['label' => Yii::t("appLayoutsMain", "russian"), 'url' => ''],
+                ['label' => Yii::t("appLayoutsMain", "english"), 'url' => '#']
             ]],
             Yii::$app->user->isGuest ? (
-            ['label' => 'Login/Registration', 'url' => ['/site/login']]
+            ['label' => Yii::t("appLayoutsMain", "login"), 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -75,7 +77,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?php echo Yii::t("appLayoutsMain", "myCompany")?> <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
